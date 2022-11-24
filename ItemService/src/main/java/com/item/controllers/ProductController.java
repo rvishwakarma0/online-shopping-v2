@@ -1,4 +1,4 @@
-package com.product.controllers;
+package com.item.controllers;
 
 import java.util.List;
 
@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.product.entities.Item;
-import com.product.service.ProductService;
+import com.item.entities.Item;
+import com.item.service.ItemService;
 
 @RestController
 @RequestMapping("/items")
 public class ProductController {
 	
 	@Autowired
-	ProductService service; 
+	ItemService service; 
 
 	@GetMapping("")
 	List<Item> getProducts(){

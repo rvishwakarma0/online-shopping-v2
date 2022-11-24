@@ -1,4 +1,4 @@
-package com.product.service;
+package com.item.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,14 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.product.entities.Item;
-import com.product.repository.ProductRepository;
+import com.item.entities.Item;
+import com.item.repository.ItemRepository;
 
 @Service
-public class ProductService  {
+public class ItemService  {
 
 	@Autowired
-	ProductRepository repo;
+	ItemRepository repo;
 	
 	public List<Item> getAllItems() {
 	  List<Item> items = new ArrayList<>();
@@ -23,6 +23,10 @@ public class ProductService  {
 	  return items;
 	}
 	public Item getItemByName(String name) {
-		return repo.findByName(name).get(0);
+		List<Item> list = repo.findByName(name);
+		if(list.isEmpty())
+			return null;
+		else
+			return repo.findByName(name).get(0);
 	}
 }
