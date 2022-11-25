@@ -1,4 +1,4 @@
-insert into product values (1, 'soap', 'milk soap', 30.0);
-insert into product values (2, 'biscuit', 'tasty biscuit', 10.0);
-insert into product values (3, 'brush', 'tooth brush', 15.0);
-insert into product values (4, 'tea', 'tea bag 1kg', 20.0);
+insert into customer values (1, 'pankaj-taneja@gmail.com', 'pankaj', 'taneja');
+insert into customer values (2, 'princessriya@yahoo.com', 'riya', 'kumar');
+insert into customer values (3, 'riya-vashishtha@gmail.com', 'riya', 'vashishtha');
+insert into customer values (4, 'rvishwakarma00786@gmail.com', 'rajeev', 'vishwakarma');

@@ -1,6 +1,5 @@
-create table product(
+create table customer(
 id int PRIMARY KEY,
-name varchar(20),
-description varchar(100),
-price decimal(8,3) 
-);
+email varchar(30),
+first_name varchar(20),
+last_name varchar(20));
