@@ -8,8 +8,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.cts.customerService.entities.Customer;
-import com.cts.customerService.entities.CustomerEvent;
 import com.cts.customerService.repository.CustomerRepository;
+import com.kafka.dtos.CustomerDTO;
+import com.kafka.dtos.CustomerEvent;
 
 @Service
 public class CustomerService {
@@ -20,7 +21,7 @@ public class CustomerService {
 	 
 	@Autowired KafkaTemplate<String, CustomerEvent> kafkaTemplate;
 	
-	private static final String TOPIC = "NewTopic";
+	private static final String TOPIC = "customerTopic";
 	
 	public List<Customer> getAllCustomers() {
 		List<Customer> li = new ArrayList<>();
@@ -31,13 +32,14 @@ public class CustomerService {
 		return li;
 	}
 
-	public void createCustomers(Customer customer) {
-		customer.setId(IdGenerator.nextValue());
-		repo.save(customer);
-		sendCustomerEvent(customer);
+	public void createCustomers(Customer cs) {
+		cs.setId(IdGenerator.nextValue());
+		repo.save(cs);
+		CustomerDTO dto = new CustomerDTO(cs.getId(), cs.getEmail(), cs.getFirst_name(), cs.getLast_name());
+		sendCustomerEvent(dto);
 	}
 	
-	public void sendCustomerEvent(Customer cs) {
+	public void sendCustomerEvent(CustomerDTO cs) {
 		CustomerEvent cevent = new CustomerEvent("CustomerCreated", "CustomerCreated", cs);
 		kafkaTemplate.send(TOPIC, cevent);
 	}
