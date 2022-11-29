@@ -1,13 +1,13 @@
 package com.cts.customerService.service;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Random;
 
-public class IdGenerator {
+public class IdGenerator{
 	
-	  private static final AtomicInteger counter = new AtomicInteger(5);
+	public static String generate(String name){
+		Random rm = new Random();
+		int i = rm.nextInt(10, 99);
+		return (name.substring(0, 3) + String.valueOf(i));
+	}
 
-	  public static int nextValue() {
-	    return counter.getAndIncrement();
-	  }
-		
 }

@@ -23,7 +23,8 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/customer", method = RequestMethod.POST)
-	String createCustomer(@RequestBody Customer cs){
+	String createCustomer(@RequestBody Customer cs) throws Exception{
+		service.validateInputs(cs);
 		service.createCustomers(cs);
 		return "customerCreated";
 	}

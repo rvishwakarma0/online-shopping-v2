@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.cts.customerService.entities.Customer;
 
-public interface CustomerRepository extends CrudRepository<Customer, Integer> {
+public interface CustomerRepository extends CrudRepository<Customer, String> {
 
 }

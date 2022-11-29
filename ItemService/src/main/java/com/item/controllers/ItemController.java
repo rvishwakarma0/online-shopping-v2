@@ -16,18 +16,18 @@ import com.item.service.ItemService;
 
 @RestController
 @RequestMapping("/items")
-public class ProductController {
+public class ItemController {
 	
 	@Autowired
 	ItemService service; 
 
 	@GetMapping("")
-	List<Item> getProducts(){
+	List<Item> getItems(){
 		return service.getAllItems();
 	}
 	
 	@GetMapping("/{name}")
-	Item getProduct(@PathVariable String name){
+	Item getItem(@PathVariable String name){
 		return service.getItemByName(name);
 	}
 	

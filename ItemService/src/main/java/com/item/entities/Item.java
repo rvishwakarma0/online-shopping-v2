@@ -1,9 +1,7 @@
 package com.item.entities;
 
-import java.math.BigDecimal;
 
 import javax.persistence.Entity;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -16,9 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Item {
 	@Id
-	int id;
+	String id;
 	String name;
 	String description;
-	BigDecimal price;
+	Double price;
 	
 }
