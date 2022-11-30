@@ -35,7 +35,7 @@ public class SOSService {
 	
 	
 	
-	public SalesOrder createOrder(SalesOrderDTO salesOrderDTO) throws Exception {
+	public SalesOrder createOrder(SalesOrderDTO salesOrderDTO, String token) throws Exception {
 		CustomerSOS customerSOS = null;
 		List<OrderLineItem> orderItems = new ArrayList<>();
 		SalesOrder so = new SalesOrder();
@@ -44,7 +44,7 @@ public class SOSService {
 		customerSOS = getCustomerFromId(salesOrderDTO.getCust_id());
 		//check items validity 
 		List<OrderLineItemDTO> items = salesOrderDTO.getItems();
-		if(itemService.checkItems(items)) {
+		if(itemService.checkItems(items, token)) {
 			for (OrderLineItemDTO item : items)
 				if(item.getItem_quantity()>0)
 					orderItems.add(new OrderLineItem(UniqueIdGenerator.generate(), item.getItem_name(), item.getItem_quantity(), so));
@@ -56,7 +56,7 @@ public class SOSService {
 		
 		so.setCustomer(customerSOS);
 		so.setOrderLineItems(orderItems);
-		so.setTotal_price(itemService.calculateBillAmount(items));
+		so.setTotal_price(itemService.calculateBillAmount(items, token));
 		so.setOrder_desc(salesOrderDTO.getOrder_desc());
 		so.setOrder_date(salesOrderDTO.getOrder_date());
 		sorepo.save(so);

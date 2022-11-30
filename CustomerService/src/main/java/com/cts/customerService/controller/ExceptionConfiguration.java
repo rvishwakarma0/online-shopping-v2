@@ -33,10 +33,10 @@ public class ExceptionConfiguration extends ResponseEntityExceptionHandler {
     }
     
 	@ExceptionHandler(Exception.class)
-	@ResponseStatus(HttpStatus.CONFLICT)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorResponse handleException(Exception ex)
 	{
-		return new ErrorResponse(HttpStatus.CONFLICT.value(),
+		return new ErrorResponse(HttpStatus.BAD_REQUEST.value(),
                        ex.getMessage());
 	}
 

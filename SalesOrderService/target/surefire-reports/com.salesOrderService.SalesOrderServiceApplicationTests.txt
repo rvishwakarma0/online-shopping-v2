@@ -1,9 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.salesOrderService.SalesOrderServiceApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 7.774 s <<< FAILURE! - in com.salesOrderService.SalesOrderServiceApplicationTests
-contextLoads  Time elapsed: 0.016 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Invalid bean definition with name 'com.salesOrderService.feign_clients.ItemServiceFeignClient' defined in null: Could not resolve placeholder 'feign.clients.item-service-url' in value "http://${feign.clients.item-service-url}"; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'feign.clients.item-service-url' in value "http://${feign.clients.item-service-url}"
-Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'feign.clients.item-service-url' in value "http://${feign.clients.item-service-url}"
-

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ import com.salesOrderService.dtos.SOResponse;
 import com.salesOrderService.dtos.SalesOrderDTO;
 import com.salesOrderService.entities.OrderLineItem;
 import com.salesOrderService.entities.SalesOrder;
+import com.salesOrderService.security.service.AuthService;
 import com.salesOrderService.services.SOSService;
 
 @RestController
@@ -29,10 +31,14 @@ public class SalesController {
 	@Autowired
 	SOSService service;
 	
+	@Autowired
+	AuthService authService;
+	
 	@PostMapping("")
-	public SOResponse createOrder(@RequestBody SalesOrderDTO salesOrderDTO) throws Exception {
+	public SOResponse createOrder(@RequestHeader("Authorization") String token,@RequestBody SalesOrderDTO salesOrderDTO) throws Exception {
+		authService.validateToken(token);
 		service.validateSalesOrderDto(salesOrderDTO);
-		SalesOrder order = service.createOrder(salesOrderDTO);
+		SalesOrder order = service.createOrder(salesOrderDTO, token);
 		List<OrderLineItem> items = order.getOrderLineItems();
 		List<OrderLineItemDTO> itemsDto = new ArrayList<OrderLineItemDTO>();
 		for(OrderLineItem i: items) {
@@ -42,7 +48,8 @@ public class SalesController {
 	}
 	
 	@GetMapping("")
-	public List<SOResponse> getOrders(@RequestParam String customerId) throws Exception {
+	public List<SOResponse> getOrders(@RequestHeader("Authorization") String token,@RequestParam String customerId) throws Exception {
+		authService.validateToken(token);
 		System.out.println("Inside get order");
 
 		List<SalesOrder> orders = service.getOrders(customerId);
